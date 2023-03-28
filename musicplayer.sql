@@ -1124,3 +1124,7 @@ VALUES (84356, 'SW003', '2020-12-13'),
        (11520, 'SW003', '2023-06-21'),
        (11520, 'FS003', '2019-05-13'),
        (11520, 'BY005', '2017-04-21');
+
+-- this function returns an age from a date
+CREATE FUNCTION getAge ( vDate DATE) RETURNS INTEGER
+   RETURN TIMESTAMPDIFF(YEAR, vDate, CURDATE());

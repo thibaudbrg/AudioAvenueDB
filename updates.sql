@@ -9,13 +9,13 @@ DO
 
 -- Another UPDATE statement that switches the subscription of a user to YOUNG if he is between 18 and 25 years old. It does it only if the user has not already the Young subscription (3) or the Family subscription (2).
 UPDATE User SET SubID = 3
-WHERE AGE(UBirthDate) BETWEEN 18 AND 25
+WHERE getAge(UBirthDate) BETWEEN 18 AND 25
 AND (SubID != 2 AND SubID != 3);
 
 
 -- Also here is the opposite command that downgrade the subscription back to the free subscription (0) if the user is not between 18 and 25 years old anymore and had the Young subscription (3):
 UPDATE User SET SubID = 0
-WHERE AGE(UBirthDate) NOT BETWEEN 18 AND 25
+WHERE getAge(UBirthDate) NOT BETWEEN 18 AND 25
 AND (SubId = 3);
 
 

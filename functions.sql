@@ -18,7 +18,5 @@ DELIMITER ;
 SELECT GenreName, Artists_by_genre(GenreName) AS Count From genre;
 
 
--- this function returns an age from a date
-CREATE FUNCTION AGE ( vDate DATE) RETURNS INTEGER
-   RETURN TIMESTAMPDIFF(YEAR, vDate, CURDATE());
+
 

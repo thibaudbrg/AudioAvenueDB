@@ -20,7 +20,6 @@
   SELECT * FROM Produce;
 
 
-
 -- To show the description of the POP genre:
   SELECT GenreDesc FROM Genre
     WHERE genreName = "Pop";
@@ -31,7 +30,7 @@
 
 -- To show the name and price of all subscription types where the price is between 50 and 80:
   SELECT SubName , price FROM SubscriptionType
-    WHERE Price > 50 AND Price > 80;
+    WHERE Price > 50 AND Price < 80;
 
 -- To show each artistID, artist first and second names and the number of songs produced by each of these artists:
   SELECT ArtistID, artfirstname, artlastname, COUNT(songID) AS SongCount
@@ -56,20 +55,17 @@
          = sname)
          ELSE count(userID)*(SELECT PRICE FROM SubscriptionType WHERE SubName =
          sname)
-         END)
+         END) AS moneyEarned
    FROM SubscriptionType NATURAL JOIN User
    WHERE user.subid = subscriptiontype.subid
       group by SubName;
 
--- To create function to calculate age from birth date in years:
-   CREATE FUNCTION getAge ( vDate DATE) RETURNS INTEGER
-   RETURN TIMESTAMPDIFF(YEAR, vDate, CURDATE());
 
 -- To classify users with respect to their age:
    SELECT CASE
           WHEN GetAge(UBirthDate) BETWEEN 13 AND 20 THEN '13-20'
            WHEN GetAge(UBirthDate) BETWEEN 20 AND 30 THEN '20-30'
-           WHEN GetAge(UBirthDate) BETWEEN 30 AND 40 THEN '30-50'
+           WHEN GetAge(UBirthDate) BETWEEN 30 AND 50 THEN '30-50'
            ELSE '50+'
        END AS AgeRange,
        COUNT(userID) AS UserCount
